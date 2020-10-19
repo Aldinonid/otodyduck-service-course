@@ -95,14 +95,14 @@ class CourseController extends Controller
 			if ($request->input('type') === 'premium') {
 				return response()->json(['status' => 'error', 'message' => 'Premium course should have price'], 400);
 			}
-    }
+		}
 
-    $slug = ['slug' => createSlug($data['name'])];
+		$slug = ['slug' => createSlug($data['name'])];
 
-    $data = array_merge($data, $slug);
-    
+		$data = array_merge($data, $slug);
+
 		$course = Course::create($data);
-		return response()->json(['status' => 'success', 'data' => $data]);
+		return response()->json(['status' => 'success', 'data' => $course]);
 	}
 
 	public function update(Request $request, $id)
