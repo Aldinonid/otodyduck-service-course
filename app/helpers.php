@@ -45,3 +45,8 @@ function getUserByIds($userIds = [])
     ];
   }
 }
+
+function createSlug($courseName){
+  $slug = strtolower(join('-', explode(' ', $courseName)));
+  return $slug;
+}
