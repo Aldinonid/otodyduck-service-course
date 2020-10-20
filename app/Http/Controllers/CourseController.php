@@ -7,6 +7,7 @@ use App\Chapter;
 use App\Mentor;
 use App\MyCourse;
 use App\Course;
+use App\CourseTool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -102,6 +103,25 @@ class CourseController extends Controller
 		$data = array_merge($data, $slug);
 
 		$course = Course::create($data);
+
+		$courseId = $course['id'];
+		$toolIds = $request->input('tool_id');
+		$getToolAPI = count($toolIds) > 0 ? getToolByIds($toolIds) : getTool($toolIds);
+
+		if ($getToolAPI['status'] === 'error') {
+			return response()->json(['status' => $getToolAPI['status'], 'message' => $getToolAPI['message']], $getToolAPI['http_code']);
+		}
+
+		foreach ($toolIds as $i) {
+			$toolData = [
+				'course_id' => $courseId,
+				'tool_id' => $i
+			];
+			$tool = CourseTool::create($toolData);
+		}
+
+		$course['tool'] = array($getToolAPI['data']);
+
 		return response()->json(['status' => 'success', 'data' => $course]);
 	}
 
