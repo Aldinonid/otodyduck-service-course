@@ -21,4 +21,9 @@ class CourseTool extends Model
 	{
 		return $this->belongsTo('App\Course');
 	}
+
+	public function tool()
+	{
+		return $this->belongsTo('App\Tool');
+	}
 }

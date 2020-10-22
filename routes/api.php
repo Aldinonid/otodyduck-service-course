@@ -83,3 +83,14 @@ Route::post('my-courses', 'MyCourseController@create');
 Route::post('reviews', 'ReviewController@create');
 Route::put('reviews/{id}', 'ReviewController@update');
 Route::delete('reviews/{id}', 'ReviewController@destroy');
+
+/**
+ ** Tool Route API
+ ** POST, PUT, DELETE 
+ * 
+ * */
+Route::get('tools', 'ToolController@index');
+Route::get('tools/{id}', 'ToolController@show');
+Route::post('tools', 'ToolController@create');
+Route::put('tools/{id}', 'ToolController@update');
+Route::delete('tools/{id}', 'ToolController@destroy');

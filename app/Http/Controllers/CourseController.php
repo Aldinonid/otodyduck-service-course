@@ -7,6 +7,7 @@ use App\Chapter;
 use App\Mentor;
 use App\MyCourse;
 use App\Course;
+use App\Tool;
 use App\CourseTool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -99,28 +100,32 @@ class CourseController extends Controller
 		}
 
 		$slug = ['slug' => createSlug($data['name'])];
-
 		$data = array_merge($data, $slug);
 
-		$course = Course::create($data);
-
-		$courseId = $course['id'];
 		$toolIds = $request->input('tool_id');
-		$getToolAPI = count($toolIds) > 0 ? getToolByIds($toolIds) : getTool($toolIds);
+		$tool = count($toolIds) > 0 ? Tool::whereIn('id', $toolIds)->get()->toArray() : null;
 
-		if ($getToolAPI['status'] === 'error') {
-			return response()->json(['status' => $getToolAPI['status'], 'message' => $getToolAPI['message']], $getToolAPI['http_code']);
+
+		if (!$tool) {
+			if ($tool === []) {
+				return response()->json(['status' => 'error', 'message' => 'Tool not Found'], 404);
+			}
+
+			$course = Course::create($data);
+			true;
+		} else {
+			$course = Course::create($data);
+			$courseId = $course['id'];
+			foreach ($tool as $i) {
+				$toolData = [
+					'course_id' => $courseId,
+					'tool_id' => $i['id']
+				];
+				CourseTool::create($toolData);
+			}
+
+			$course['tool'] = array($tool);
 		}
-
-		foreach ($toolIds as $i) {
-			$toolData = [
-				'course_id' => $courseId,
-				'tool_id' => $i
-			];
-			$tool = CourseTool::create($toolData);
-		}
-
-		$course['tool'] = array($getToolAPI['data']);
 
 		return response()->json(['status' => 'success', 'data' => $course]);
 	}
@@ -167,9 +172,42 @@ class CourseController extends Controller
 			}
 		}
 
+		$slug = ['slug' => createSlug($data['name'])];
+		$data = array_merge($data, $slug);
 		$course->fill($data);
 
+		$toolIds = $request->input('tool_id');
+		$tool = count($toolIds) >= 1 ? Tool::whereIn('id', $toolIds)->get()->toArray() : CourseTool::where('course_id', '=', $id)->delete();
+
 		$course->save();
+
+		if ($toolIds === []) {
+			return response()->json(['status' => 'success', 'data' => $course]);
+		}
+
+		if (!$tool) {
+			true;
+		} else {
+			CourseTool::where('course_id', '=', $id)->whereNotIn('tool_id', $toolIds)->delete();
+
+			foreach ($tool as $i) {
+				$isExistCourseTool = CourseTool::where('course_id', '=', $id)->where('tool_id', '=', $i['id'])->exists();
+
+				if ($isExistCourseTool) {
+					true;
+				} else {
+					$toolData = [
+						'course_id' => $id,
+						'tool_id' => $i['id']
+					];
+
+					CourseTool::create($toolData);
+				}
+			}
+
+			$course['tool'] = $tool;
+		}
+
 		return response()->json(['status' => 'success', 'data' => $course]);
 	}
 
