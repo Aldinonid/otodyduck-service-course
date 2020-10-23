@@ -49,12 +49,15 @@ class CourseController extends Controller
 			}
 		}
 
+		$tools = Tool::join('course_tools', 'tools.id', '=', 'course_tools.tool_id')->where('course_tools.course_id', '=', $id)->select('tools.*')->get();
 		$totalStudents = MyCourse::where('course_id', '=', $id)->count();
 		$totalVideos = Chapter::where('course_id', '=', $id)->withCount('lesson')->get()->toArray();
 		$finalTotalVideos = array_sum(array_column($totalVideos, 'lesson_count'));
 		$course['reviews'] = $reviews;
 		$course['total_videos'] = $finalTotalVideos;
 		$course['total_students'] = $totalStudents;
+		$course['tools'] = $tools;
+
 
 		return response()->json([
 			'status' => 'success',
