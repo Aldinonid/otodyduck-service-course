@@ -58,7 +58,7 @@ class LessonController extends Controller
 	{
 		$rules = [
 			'name' => 'string',
-			'video' => 'url',
+			'video' => 'string',
 			'chapter_id' => 'integer',
 		];
 
