@@ -14,10 +14,17 @@ use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
-		$courses = Course::all();
-		return response()->json(['status' => 'success', 'data' => $courses]);
+		$status = $request->input('status');
+
+		if (isset($status)) {
+			$courses = Course::where('status', '=', $status)->get();
+			return response()->json(['status' => 'success', 'data' => $courses]);
+		} else {
+			$courses = Course::all();
+			return response()->json(['status' => 'success', 'data' => $courses]);
+		}
 	}
 
 	public function show($id)
