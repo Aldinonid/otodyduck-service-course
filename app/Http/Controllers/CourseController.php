@@ -19,9 +19,19 @@ class CourseController extends Controller
 
 		if (isset($status)) {
 			$courses = Course::where('status', '=', $status)->select('id', 'name', 'slug', 'thumbnail', 'type', 'status', 'price', 'mentor_id')->get();
+
+			foreach ($courses as $course) {
+				$course->mentor_id = getUser($course->mentor_id)['data'];
+			}
+
 			return response()->json(['status' => 'success', 'data' => $courses]);
 		} else {
 			$courses = Course::select('id', 'name', 'slug', 'thumbnail', 'type', 'status', 'price', 'mentor_id')->get();
+
+			foreach ($courses as $course) {
+				$course->mentor_id = getUser($course->mentor_id)['data'];
+			}
+
 			return response()->json(['status' => 'success', 'data' => $courses]);
 		}
 	}
