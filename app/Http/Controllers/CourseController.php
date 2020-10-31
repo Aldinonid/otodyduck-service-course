@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Chapter;
-use App\Mentor;
 use App\MyCourse;
 use App\Course;
 use App\Tool;
@@ -19,10 +18,10 @@ class CourseController extends Controller
 		$status = $request->input('status');
 
 		if (isset($status)) {
-			$courses = Course::where('status', '=', $status)->get();
+			$courses = Course::where('status', '=', $status)->select('id', 'name', 'slug', 'thumbnail', 'type', 'status', 'price', 'mentor_id')->get();
 			return response()->json(['status' => 'success', 'data' => $courses]);
 		} else {
-			$courses = Course::all();
+			$courses = Course::select('id', 'name', 'slug', 'thumbnail', 'type', 'status', 'price', 'mentor_id')->get();
 			return response()->json(['status' => 'success', 'data' => $courses]);
 		}
 	}
@@ -30,7 +29,6 @@ class CourseController extends Controller
 	public function show($id)
 	{
 		$course = Course::with('chapter.lesson')
-			->with('mentor')
 			->with('images')
 			->find($id);
 
@@ -45,7 +43,6 @@ class CourseController extends Controller
 		if (count($reviews) > 0) {
 			$userIds = array_column($reviews, 'user_id');
 			$users = getUserByIds($userIds);
-			$users;
 			if ($users['status'] === 'error') {
 				$reviews = [];
 			} else {
@@ -60,6 +57,7 @@ class CourseController extends Controller
 		$totalStudents = MyCourse::where('course_id', '=', $id)->count();
 		$totalVideos = Chapter::where('course_id', '=', $id)->withCount('lesson')->get()->toArray();
 		$finalTotalVideos = array_sum(array_column($totalVideos, 'lesson_count'));
+		$course['mentor_id'] = getUser($course['mentor_id'])['data'];
 		$course['reviews'] = $reviews;
 		$course['total_videos'] = $finalTotalVideos;
 		$course['total_students'] = $totalStudents;
@@ -98,9 +96,9 @@ class CourseController extends Controller
 		}
 
 		$mentorId = $request->input('mentor_id');
-		$mentor = Mentor::find($mentorId);
-		if (!$mentor) {
-			return response()->json(['status' => 'error', 'message' => 'Mentor not Found'], 404);
+		$mentor = getUser($mentorId);
+		if ($mentor['status'] === 'error') {
+			return response()->json(['status' => $mentor['status'], 'message' => $mentor['message']], $mentor['http_code']);
 		}
 
 		if (!$request->input('price')) {
@@ -171,9 +169,9 @@ class CourseController extends Controller
 		}
 
 		$mentorId = $request->input('mentor_id');
-		$mentor = Mentor::find($mentorId);
-		if (!$mentor) {
-			return response()->json(['status' => 'error', 'message' => 'Mentor not Found'], 404);
+		$mentor = getUser($mentorId);
+		if ($mentor['status'] === 'error') {
+			return response()->json(['status' => $mentor['status'], 'message' => $mentor['message']], $mentor['http_code']);
 		}
 
 		if (!$request->input('price')) {

@@ -24,7 +24,7 @@ class CreateCourses extends Migration
 			$table->integer('price')->default(0)->nullable();
 			$table->enum('level', ['all level', 'beginner', 'intermediate', 'advanced']);
 			$table->longText('description')->nullable();
-			$table->foreignId('mentor_id')->constrained('mentors')->onDelete('cascade');
+			$table->integer('mentor_id');
 			$table->timestamps();
 		});
 	}

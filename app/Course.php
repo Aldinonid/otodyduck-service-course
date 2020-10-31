@@ -17,11 +17,6 @@ class Course extends Model
 		'name', 'slug', 'certificate', 'thumbnail', 'type', 'status', 'price', 'level', 'description', 'mentor_id'
 	];
 
-	public function mentor()
-	{
-		return $this->belongsTo('App\Mentor');
-	}
-
 	public function chapter()
 	{
 		return $this->hasMany('App\Chapter')->orderBy('id', 'ASC');
