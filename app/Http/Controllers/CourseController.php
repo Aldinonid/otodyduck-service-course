@@ -15,29 +15,30 @@ class CourseController extends Controller
 {
 	public function index(Request $request)
 	{
-		$status = $request->input('status');
+		$courses = Course::query();
 
-		if (isset($status)) {
-			$courses = Course::where('status', '=', $status)->select('id', 'name', 'slug', 'thumbnail', 'type', 'status', 'price', 'mentor_id')->get();
+		$q = $request->query('q');
+		$status = $request->query('status');
 
-			foreach ($courses as $course) {
-				$course->mentor_id = getUser($course->mentor_id)['data'];
-			}
+		$courses->when($q, function ($query) use ($q) {
+			return $query->whereRaw("name LIKE '%" . strtolower($q) . "%'");
+		});
 
-			return response()->json(['status' => 'success', 'data' => $courses]);
-		} else {
-			$courses = Course::select('id', 'name', 'slug', 'thumbnail', 'type', 'status', 'price', 'mentor_id')->get();
+		$courses->when($status, function ($query) use ($status) {
+			return $query->where('status', '=', $status);
+		});
 
-			foreach ($courses as $course) {
-				$course->mentor_id = getUser($course->mentor_id)['data'];
-			}
-
-			return response()->json(['status' => 'success', 'data' => $courses]);
+		foreach ($courses as $course) {
+			$course->mentor_id = getUser($course->mentor_id)['data'];
 		}
+
+		return response()->json(['status' => 'success', 'data' => $courses->paginate(12)]);
 	}
 
-	public function show($id)
+	public function show($slug)
 	{
+		$id = Course::where('slug', $slug)->first()->id;
+
 		$course = Course::with('chapter.lesson')
 			->with('images')
 			->find($id);
@@ -89,7 +90,7 @@ class CourseController extends Controller
 			'type' => 'required|in:free,premium',
 			'status' => 'required|in:draft,published',
 			'price' => 'integer',
-			'level' => 'required|in:all level,beginner,intermediate,advanced',
+			'level' => 'required|in:All Level,Beginner,Intermediate,Advanced',
 			'description' => 'string',
 			'mentor_id' => 'required|integer',
 		];
@@ -103,6 +104,13 @@ class CourseController extends Controller
 				'status' => 'error',
 				'message' => $validator->errors()
 			], 400);
+		}
+
+		//? Check name should be unique ?//
+		$name = $request->input('name');
+		$isNameExisting = Course::where('name', $name)->exists();
+		if ($isNameExisting) {
+			return response()->json(['status' => 'error', 'message' => 'Course Name must be unique']);
 		}
 
 		$mentorId = $request->input('mentor_id');
@@ -157,7 +165,7 @@ class CourseController extends Controller
 			'type' => 'in:free,premium',
 			'status' => 'in:draft,published',
 			'price' => 'integer',
-			'level' => 'in:all level,beginner,intermediate,advanced',
+			'level' => 'required|in:All Level,Beginner,Intermediate,Advanced',
 			'description' => 'string',
 			'mentor_id' => 'integer',
 		];
@@ -176,6 +184,13 @@ class CourseController extends Controller
 		$course = Course::find($id);
 		if (!$course) {
 			return response()->json(['status' => 'error', 'message' => 'Course not Found'], 404);
+		}
+
+		//? Check name should be unique ?//
+		$name = $request->input('name');
+		$isNameExisting = Course::where('name', $name)->exists();
+		if ($isNameExisting) {
+			return response()->json(['status' => 'error', 'message' => 'Course Name must be unique']);
 		}
 
 		$mentorId = $request->input('mentor_id');
