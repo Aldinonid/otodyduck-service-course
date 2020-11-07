@@ -15,24 +15,33 @@ class CourseController extends Controller
 {
 	public function index(Request $request)
 	{
-		$courses = Course::query();
-
 		$q = $request->query('q');
 		$status = $request->query('status');
+		$category = $request->query('category');
 
-		$courses->when($q, function ($query) use ($q) {
-			return $query->whereRaw("name LIKE '%" . strtolower($q) . "%'");
-		});
+		$courses = Course::all();
 
-		$courses->when($status, function ($query) use ($status) {
-			return $query->where('status', '=', $status);
-		});
+		if (isset($q)) {
+			$courses = Course::whereRaw("name LIKE '%" . strtolower($q) . "%'")->get();
+		}
+
+		if (isset($status)) {
+			$courses = Course::where('status', $status)->get();
+		}
+
+		if (isset($q) && isset($status)) {
+			$courses = Course::whereRaw("name LIKE '%" . strtolower($q) . "%'")->where('status', $status)->get();
+		}
+
+		if (isset($category) && isset($status)) {
+			$courses = Course::where('category', $category)->where('status', $status)->get();
+		}
 
 		foreach ($courses as $course) {
 			$course->mentor_id = getUser($course->mentor_id)['data'];
 		}
 
-		return response()->json(['status' => 'success', 'data' => $courses->paginate(12)]);
+		return response()->json(['status' => 'success', 'data' => $courses]);
 	}
 
 	public function show($slug)
@@ -90,8 +99,9 @@ class CourseController extends Controller
 			'type' => 'required|in:free,premium',
 			'status' => 'required|in:draft,published',
 			'price' => 'integer',
-			'level' => 'required|in:All Level,Beginner,Intermediate,Advanced',
+			'level' => 'required|in:all level,beginner,intermediate,advanced',
 			'description' => 'string',
+			'category' => 'required|in:design,development,soft skill',
 			'mentor_id' => 'required|integer',
 		];
 
@@ -165,8 +175,9 @@ class CourseController extends Controller
 			'type' => 'in:free,premium',
 			'status' => 'in:draft,published',
 			'price' => 'integer',
-			'level' => 'required|in:All Level,Beginner,Intermediate,Advanced',
+			'level' => 'required|in:all level,beginner,intermediate,advanced',
 			'description' => 'string',
+			'category' => 'required|in:design,development,soft skill',
 			'mentor_id' => 'integer',
 		];
 
@@ -188,7 +199,7 @@ class CourseController extends Controller
 
 		//? Check name should be unique ?//
 		$name = $request->input('name');
-		$isNameExisting = Course::where('name', $name)->exists();
+		$isNameExisting = Course::where('name', $name)->where('id', 'NOT IN', $id)->exists();
 		if ($isNameExisting) {
 			return response()->json(['status' => 'error', 'message' => 'Course Name must be unique']);
 		}

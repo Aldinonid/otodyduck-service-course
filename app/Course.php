@@ -14,7 +14,7 @@ class Course extends Model
 	];
 
 	protected $fillable = [
-		'name', 'slug', 'certificate', 'thumbnail', 'type', 'status', 'price', 'level', 'description', 'mentor_id'
+		'name', 'slug', 'certificate', 'thumbnail', 'type', 'status', 'price', 'level', 'description', 'category', 'mentor_id'
 	];
 
 	public function chapter()
