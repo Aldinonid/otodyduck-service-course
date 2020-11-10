@@ -11,7 +11,7 @@ class MyCourseController extends Controller
 {
 	public function index(Request $request)
 	{
-		$myCourses = MyCourse::query()->with('course');
+		$myCourses = MyCourse::query()->with('course:id,name,slug,category,mentor_id');
 
 		$userId = $request->query('user_id');
 		$courseId = $request->query('course_id');
@@ -24,7 +24,13 @@ class MyCourseController extends Controller
 			return $query->where('course_id', '=', $courseId);
 		});
 
-		return response()->json(['status' => 'success', 'data' => $myCourses->get()]);
+		$myCourses = $myCourses->get();
+
+		foreach ($myCourses as $item) {
+			$item['course']['mentor_id'] = getUser($item['course']['mentor_id'])['data'];
+		}
+
+		return response()->json(['status' => 'success', 'data' => $myCourses]);
 	}
 
 	public function create(Request $request)
