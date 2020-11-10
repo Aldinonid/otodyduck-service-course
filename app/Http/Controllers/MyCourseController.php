@@ -11,7 +11,7 @@ class MyCourseController extends Controller
 {
 	public function index(Request $request)
 	{
-		$myCourses = MyCourse::query()->with('course:id,name,slug,category,mentor_id');
+		$myCourses = MyCourse::query()->with('course');
 
 		$userId = $request->query('user_id');
 		$courseId = $request->query('course_id');
