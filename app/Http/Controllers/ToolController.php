@@ -8,9 +8,17 @@ use Illuminate\Support\Facades\Validator;
 
 class ToolController extends Controller
 {
-	public function index()
+	public function index(Request $request)
 	{
+
+		$course_id = $request->query('course_id');
+
 		$tools = Tool::all();
+
+		if (isset($course_id)) {
+			$tools = Tool::join('course_tools', 'tools.id', '=', 'course_tools.tool_id')->where('course_tools.course_id', '=', $course_id)->select('tools.*')->get();
+		}
+
 		return response()->json(['status' => 'success', 'data' => $tools]);
 	}
 
