@@ -74,6 +74,7 @@ Route::delete('image-courses/{id}', 'ImageCourseController@destroy');
  * */
 Route::get('my-courses', 'MyCourseController@index');
 Route::post('my-courses', 'MyCourseController@create');
+Route::post('my-courses/premium', 'MyCourseController@createPremiumAccess');
 
 /**
  ** Review Route API
@@ -94,3 +95,14 @@ Route::get('tools/{id}', 'ToolController@show');
 Route::post('tools', 'ToolController@create');
 Route::put('tools/{id}', 'ToolController@update');
 Route::delete('tools/{id}', 'ToolController@destroy');
+
+/**
+ ** Flow Route API
+ ** POST, PUT, DELETE 
+ * 
+ * */
+Route::get('flows', 'FlowController@index');
+Route::get('flows/{id}', 'FlowController@show');
+Route::post('flows', 'FlowController@create');
+Route::put('flows/{id}', 'FlowController@update');
+Route::delete('flows/{id}', 'FlowController@destroy');
