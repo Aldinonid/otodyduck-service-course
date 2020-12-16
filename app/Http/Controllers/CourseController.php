@@ -18,6 +18,7 @@ class CourseController extends Controller
 		$q = $request->query('q');
 		$status = $request->query('status');
 		$category = $request->query('category');
+		$mentor = $request->query('mentor_id');
 
 		$courses = Course::all();
 
@@ -27,6 +28,10 @@ class CourseController extends Controller
 
 		if (isset($status)) {
 			$courses = Course::where('status', $status)->get();
+		}
+
+		if (isset($mentor)) {
+			$courses = Course::where('mentor_id', $mentor)->get();
 		}
 
 		if (isset($q) && isset($status)) {
@@ -72,6 +77,9 @@ class CourseController extends Controller
 				}
 			}
 		}
+
+		//? SQL is like
+		//* SELECT tools.* FROM tools INNER JOIN course_tools ct ON ct.tool_id = tools.id WHERE ct.course_id = 2
 
 		$tools = Tool::join('course_tools', 'tools.id', '=', 'course_tools.tool_id')->where('course_tools.course_id', '=', $id)->select('tools.*')->get();
 		$totalStudents = MyCourse::where('course_id', '=', $id)->count();
@@ -175,9 +183,9 @@ class CourseController extends Controller
 			'type' => 'in:free,premium',
 			'status' => 'in:draft,published',
 			'price' => 'integer',
-			'level' => 'required|in:all level,beginner,intermediate,advanced',
+			'level' => 'in:all level,beginner,intermediate,advanced',
 			'description' => 'string',
-			'category' => 'required|in:design,development,soft skill',
+			'category' => 'in:design,development,soft skill',
 			'mentor_id' => 'integer',
 		];
 
