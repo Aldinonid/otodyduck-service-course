@@ -101,8 +101,8 @@ Route::delete('tools/{id}', 'ToolController@destroy');
  ** POST, PUT, DELETE 
  * 
  * */
-Route::get('flows', 'FlowController@index');
-Route::get('flows/{id}', 'FlowController@show');
-Route::post('flows', 'FlowController@create');
-Route::put('flows/{id}', 'FlowController@update');
-Route::delete('flows/{id}', 'FlowController@destroy');
+Route::get('flow', 'FlowController@index');
+Route::get('flow/{id}', 'FlowController@show');
+Route::post('flow', 'FlowController@create');
+Route::put('flow/{id}', 'FlowController@update');
+Route::delete('flow/{id}', 'FlowController@destroy');
