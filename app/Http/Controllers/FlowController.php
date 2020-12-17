@@ -36,7 +36,7 @@ class FlowController extends Controller
     //? SQL is like
     //* SELECT courses.* FROM courses INNER JOIN course_flows cf ON cf.course_id = courses.id WHERE cf.flow_id = $id
 
-    $courses = Course::join('course_flows', 'courses.id', '=', 'course_flows.course_id')->where('course_flows.flow_id', '=', $id)->select('courses.id', 'courses.name', 'courses.slug', 'courses.level')->get();
+    $courses = Course::join('course_flows', 'courses.id', '=', 'course_flows.course_id')->where('course_flows.flow_id', '=', $id)->select('courses.id', 'courses.name', 'courses.slug', 'courses.level', 'courses.thumbnail')->get();
     $flow['courses'] = $courses;
     $flow['total_course'] = count($flow['courses']);
 
