@@ -17,7 +17,7 @@ class CreateTools extends Migration
 			$table->id();
 			$table->string('name');
 			$table->string('url');
-			$table->string('image');
+			$table->string('image')->nullable();
 			$table->timestamps();
 		});
 	}

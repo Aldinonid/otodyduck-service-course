@@ -17,7 +17,7 @@ class CreateFlow extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->enum('level', ['all level', 'beginner', 'intermediate', 'advanced']);
             $table->timestamps();
         });
