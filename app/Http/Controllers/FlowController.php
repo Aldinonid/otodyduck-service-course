@@ -71,30 +71,7 @@ class FlowController extends Controller
     $slug = ['slug' => createSlug($data['name'])];
     $data = array_merge($data, $slug);
 
-    $courseIds = $request->input('course_id');
-    $course = count($courseIds) > 0 ? Course::whereIn('id', $courseIds)->get()->toArray() : null;
-
-
-    if (!$course) {
-      if ($course === []) {
-        return response()->json(['status' => 'error', 'message' => 'Tool not Found'], 404);
-      }
-
-      $flow = Flow::create($data);
-      true;
-    } else {
-      $flow = Flow::create($data);
-      $flowId = $flow['id'];
-      foreach ($course as $i) {
-        $courseData = [
-          'flow_id' => $flowId,
-          'course_id' => $i['id']
-        ];
-        CourseFlow::create($courseData);
-      }
-
-      $course['tool'] = array($course);
-    }
+    $flow = Flow::create($data);
 
     return response()->json(['status' => 'success', 'data' => $flow]);
   }
