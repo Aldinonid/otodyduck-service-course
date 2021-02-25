@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         [
           "name" => "SwiftUI",
           "url" => "https://developer.apple.com/xcode/swiftui/",
-          "image" => "http://45.32.102.238/images/tool/1614157126069.png"
+          "image" => "http://45.32.102.238/images/tool/1614157136069.png"
         ],
         [
           "name" => "Swfit",
@@ -347,7 +347,7 @@ class DatabaseSeeder extends Seeder
         ],
         [
           "name" => "HTML5 Dasar",
-          "course_id" => 4
+          "course_id" => 9
         ],
         [
           "name" => "Object",
