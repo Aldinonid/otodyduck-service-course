@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
         [
           "name" => "SwiftUI",
           "url" => "https://developer.apple.com/xcode/swiftui/",
-          "image" => "http://45.32.102.238/images/tool/1614157136069.png"
+          "image" => "http://45.32.102.238/images/tool/1614157126069.png"
         ],
         [
           "name" => "Swfit",
@@ -688,277 +688,277 @@ class DatabaseSeeder extends Seeder
         [
           "name" => "Pengenalan MongoDB",
           "video" => "JXXUBiJGu94",
-          "chapter_id" => 10
+          "chapter_id" => 9
         ],
         [
           "name" => "Menginstall MongoDB",
           "video" => "E4MHb_ctVKA",
-          "chapter_id" => 10
+          "chapter_id" => 9
         ],
         [
           "name" => "MongoDB Client",
           "video" => "wuQoq0-f4kQ",
-          "chapter_id" => 10
+          "chapter_id" => 9
         ],
         [
           "name" => "Database",
           "video" => "apa-CmxYVyY",
-          "chapter_id" => 10
+          "chapter_id" => 9
         ],
         [
           "name" => "Collection",
           "video" => "VbguzSZfvaE",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Data Model",
           "video" => "RURinfDM8cA",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "BSON",
           "video" => "P9T_V2h60cY",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Insert Document",
           "video" => "WRK_jXywV1Y",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Query Document",
           "video" => "3An0AfYyZAM",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Comparison Query Operator",
           "video" => "M3Ho4djinHE",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Logical Query Operator",
           "video" => "9bwQA68o7nQ",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Element Query Operator",
           "video" => "Qm5PHB0ZAXw",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Evaluation Query Operator",
           "video" => "MyM_Qa4mCGM",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Array Query Operator",
           "video" => "XG3-0TdxuG",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Projection Operator",
           "video" => "XLkZI244vnM",
-          "chapter_id" => 11
+          "chapter_id" => 10
         ],
         [
           "name" => "Perkenalan Aplikasi Design",
           "video" => "wE-eGh8gWAk",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Mempelajari Layers dan Group",
           "video" => "CIUjNIEj2sI",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Image & Color Scheme",
           "video" => "2_yBfdSfrEI",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Text Tool & Margins",
           "video" => "qqrR-tn9kCA",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Belajar UI Prototype",
           "video" => "jaLhTcc1D5M",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Belajar UI Prototype Part 2",
           "video" => "ex6GsDnqysw",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Belajar UI Prototype Part 3",
           "video" => "BdHvlAePR-Y",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Fungsi dan Membuat Component di Figma",
           "video" => "9i2YDbd68_4",
-          "chapter_id" => 12
+          "chapter_id" => 11
         ],
         [
           "name" => "Trailer",
           "video" => "KbN62Z67IYo",
-          "chapter_id" => 13
+          "chapter_id" => 12
         ],
         [
           "name" => "Kanban",
           "video" => "CCl8kzRTLy8",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "New Project",
           "video" => "4r6AiSh_7QI",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Invite Team Members",
           "video" => "YGksHRVHYRE",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "New Section",
           "video" => "AjceRis1xw0",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Tugas Baru",
           "video" => "10QA3PTE_wo",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Add Attachment",
           "video" => "9y53bDWVPR8",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Membuat Deadline",
           "video" => "9yoSsNq2Xuw",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Install Power-Ups",
           "video" => "PdK-gr2H7qs",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Special Character",
           "video" => "FWMh8PGqm3s",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Summary",
           "video" => "RimcMcGq1jY",
-          "chapter_id" => 14
+          "chapter_id" => 13
         ],
         [
           "name" => "Struktur Dasar",
           "video" => "kgvFp-IBz8I",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "Strutkur Baru HTML5",
           "video" => "ZTG1JyB-OB0",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "Caption Pada Gambar",
           "video" => "eZYkTvPHLGA",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "Dialog Dan Detail",
           "video" => "MdLIQ7hDRII",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "Input Baru Di HTML5",
           "video" => "R3PW1x-CJjE",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "Memasukkan Video Pada Website",
           "video" => "_tha-nVgZwA",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "Menggunakan Audio",
           "video" => "KUJ6BIPWq2Q",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "Ke Mana?",
           "video" => "2DBmkUtWeOw",
-          "chapter_id" => 15
+          "chapter_id" => 14
         ],
         [
           "name" => "1.1 OBJECT",
           "video" => "RwT41El778A",
-          "chapter_id" => 16
+          "chapter_id" => 15
         ],
         [
           "name" => "1.2 Object.create()",
           "video" => "3pQ7Qpzl_pY",
-          "chapter_id" => 16
+          "chapter_id" => 15
         ],
         [
           "name" => "1.3 Prototype",
           "video" => "2CQhh_6xU3s",
-          "chapter_id" => 16
+          "chapter_id" => 15
         ],
         [
           "name" => "Execution Context, Hoisting & Scope",
           "video" => "8mZsm9ZQFdY",
-          "chapter_id" => 17
+          "chapter_id" => 16
         ],
         [
           "name" => "Closure",
           "video" => "jsW0taT36qU",
-          "chapter_id" => 17
+          "chapter_id" => 16
         ],
         [
           "name" => "Arrow Function",
           "video" => "C8U_3_SBk6s",
-          "chapter_id" => 18
+          "chapter_id" => 17
         ],
         [
           "name" => "this pada Arrow Function",
           "video" => "xVmUTO7O7GQ",
-          "chapter_id" => 18
+          "chapter_id" => 17
         ],
         [
           "name" => "Higher Order Function",
           "video" => "sM880A3lS5I",
-          "chapter_id" => 18
+          "chapter_id" => 17
         ],
         [
           "name" => "Filter, Map & Reduce",
           "video" => "a37wgCcBI4A",
-          "chapter_id" => 18
+          "chapter_id" => 17
         ],
         [
           "name" => "Latihan Filter, Map & Reduce",
           "video" => "V5-rQ1MCNSM",
-          "chapter_id" => 18
+          "chapter_id" => 17
         ],
         [
           "name" => "Template Literals",
           "video" => "LywZF-xcfd8",
-          "chapter_id" => 19
+          "chapter_id" => 18
         ],
         [
           "name" => "Template Literals (Latihan)",
           "video" => "i4RIoT2tmpw",
-          "chapter_id" => 19
+          "chapter_id" => 18
         ],
         [
           "name" => "Tagged Template Literals",
           "video" => "sbjkjjCcz8M",
-          "chapter_id" => 19
+          "chapter_id" => 18
         ],
       ]
     );
