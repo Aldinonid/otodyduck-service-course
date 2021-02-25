@@ -114,8 +114,8 @@ class DatabaseSeeder extends Seeder
           "mentor_id" => 4,
         ],
         [
-          "name" => "Kelas Online iOS Development Menggunakan Swift UI",
-          "slug" => "kelas-online-ios-development-menggunakan-swift-ui",
+          "name" => "iOS Development Menggunakan Swift UI",
+          "slug" => "ios-development-menggunakan-swift-ui",
           "certificate" => false,
           "type" => "premium",
           "thumbnail" => "http://45.32.102.238/images/course/1614178067082.jpg",
